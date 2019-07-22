@@ -1,0 +1,39 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 50px;
+            height: 30px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            visibility: hidden;
+        }
+        select {
+            min-width: 150px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Countries reference book</h1>
+    <input id="search" type="text" placeholder="Search country">
+    <br>
+    <br>
+    <select id="countries"  name="countries" aria-placeholder="Select country">
+        <option value="default">Select country</option>
+    </select>   
+    <br>
+    <br>
+    <img id="flag" src="" alt="Ukrainian flag">
+    <p id="population">Population: </p>
+    <p id="borders">Borders: </p>
+    <script src="functions.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
