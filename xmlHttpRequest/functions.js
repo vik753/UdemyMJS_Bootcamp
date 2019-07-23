@@ -25,6 +25,14 @@ const resetData = () => {
     countries.filter = '';
 }
 
+//resetHtml
+const resetHtml = () => {
+    searchElement.value = '';
+    populationEl.textContent = '';
+    flagElement.style.visibility = 'hidden';
+    bordersEl.textContent = '';
+}
+
 // fiil select
 const fillCountrySelector = (sletorElement, countryArr) => {
     // console.log(countryArr);

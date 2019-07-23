@@ -12,14 +12,6 @@ const populationEl = document.querySelector('#population');
 const flagElement = document.querySelector('#flag');
 const bordersEl = document.querySelector('#borders');
 
-//resetHtml
-const resetHtml = () => {
-    searchElement.value = '';
-    populationEl.textContent = '';
-    flagElement.style.visibility = 'hidden';
-    bordersEl.textContent = '';
-}
-
 // send request
 sendRequest((countriesArray, error) => {
     if (!error) {
