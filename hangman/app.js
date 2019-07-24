@@ -14,25 +14,51 @@ window.addEventListener('keypress', (e) => {
     console.log(game1.status);
 });
 
-//Asynchronous request
-getPuzzle("3", (error, puzzle) => {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log(puzzle);
-    }
-});
+// ***** Synchronous request Promise **********
+getPuzzle('2')
+    .then((data) => console.log(data.puzzle))
+    .catch((err) => console.log(err));
 
-// Country request
-getCountry("MD", (countryData, error) => {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log(`Country name is: ${countryData.name}`);
-    }
-})
+// *** Country request Promise ***
+getCountry('US')
+    .then((country) => console.log(country.name))
+    .catch((err) => console.log(err));
 
-// //Synchronous request
+// ***** Get puzzle - fetch Promise **********
+// fetch('http://puzzle.mead.io/puzzle?wordCount=4', {})
+//     .then((response) => {
+//         if (response.status === 200) {
+//             return response.json();
+//         } else {
+//             throw new Error('Unable to fetch the puzzle')
+//         }
+//     })
+//     .then((data) => {
+//         console.log(data.puzzle);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
+
+// ******* Country request ***********
+// getCountry("MD", (countryData, error) => {
+//     if (error) {
+//         console.log(error);
+//     } else {
+//         console.log(`Country name is: ${countryData.name}`);
+//     }
+// })
+
+// ********** Asynchronous request **********
+// getPuzzle("3", (error, puzzle) => {
+//     if (error) {
+//         console.log(error);
+//     } else {
+//         console.log(puzzle);
+//     }
+// });
+
+// ********** Synchronous request **********
 // const puzzle = getPuzzleSync();
 // console.log(puzzle);
 // console.log('Hello');

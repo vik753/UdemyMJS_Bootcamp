@@ -13,7 +13,12 @@ const flagElement = document.querySelector('#flag');
 const bordersEl = document.querySelector('#borders');
 
 // send request
-sendRequest((countriesArray, error) => {
+sendRequest()
+    .then((result) => {
+        countries.countryArr = result;
+        fillCountrySelector(slectorElement, countries.countryArr);
+    }).catch((err) => console.log(err));
+/* sendRequest((countriesArray, error) => {
     if (!error) {
         countries.countryArr = countriesArray;
         //console.log(countries.countryArr);
@@ -21,7 +26,7 @@ sendRequest((countriesArray, error) => {
     } else {
         console.log(error);
     }
-});
+}); */
 
 // render html
 const renderHtml = () => {

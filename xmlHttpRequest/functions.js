@@ -1,21 +1,32 @@
 // send request
-const sendRequest = (calback) => {
-    const request = new XMLHttpRequest();
-
-    request.addEventListener('readystatechange', (e) => {
-        if (e.target.readyState === 4 && e.target.status === 200) {
-            const data = JSON.parse(e.target.responseText);
-            const countries = [];
-            data.forEach((country) => countries.push(country));
-            calback(countries, undefined);
-        } else if (e.target.readyState === 4) {
-            calback(`Error: ${e}`, undefined);
-        }
-    })
-
-    request.open('GET', 'https://restcountries.eu/rest/v2/all');
-    request.send();
+const sendRequest = () => {
+    return fetch('https://restcountries.eu/rest/v2/all')
+        .then((response) => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Unable fetch the countries data!')
+            }
+        })
+        .catch((err) => `Error: ${err}`);
 }
+// const sendRequest = (calback) => {
+//     const request = new XMLHttpRequest();
+
+//     request.addEventListener('readystatechange', (e) => {
+//         if (e.target.readyState === 4 && e.target.status === 200) {
+//             const data = JSON.parse(e.target.responseText);
+//             const countries = [];
+//             data.forEach((country) => countries.push(country));
+//             calback(countries, undefined);
+//         } else if (e.target.readyState === 4) {
+//             calback(`Error: ${e}`, undefined);
+//         }
+//     })
+
+//     request.open('GET', 'https://restcountries.eu/rest/v2/all');
+//     request.send();
+// }
 
 // reset data
 const resetData = () => {
