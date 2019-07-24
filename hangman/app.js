@@ -15,14 +15,30 @@ window.addEventListener('keypress', (e) => {
 });
 
 // ***** Synchronous request Promise **********
-getPuzzle('2')
-    .then((data) => console.log(data.puzzle))
+getPuzzle('3')
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+
+// ***** ipo request *********
+getLocation()
+    .then( async (response) => {
+        const country = await getCountry(response.country);
+        console.log(`Country: ${country.name}, City: ${response.city}, Region: ${response.region}`);
+    })
     .catch((err) => console.log(err));
 
 // *** Country request Promise ***
 getCountry('US')
-    .then((country) => console.log(country.name))
+.then((country) => console.log(country.name))
+.catch((err) => console.log(err));
+
+// ***** Get Current Country ***********
+getCurrentCountry()
+    .then((response) => {
+        console.log(response) ;
+    })
     .catch((err) => console.log(err));
+
 
 // ***** Get puzzle - fetch Promise **********
 // fetch('http://puzzle.mead.io/puzzle?wordCount=4', {})

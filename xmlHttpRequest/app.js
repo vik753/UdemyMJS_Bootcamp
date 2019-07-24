@@ -17,7 +17,8 @@ sendRequest()
     .then((result) => {
         countries.countryArr = result;
         fillCountrySelector(slectorElement, countries.countryArr);
-    }).catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 /* sendRequest((countriesArray, error) => {
     if (!error) {
         countries.countryArr = countriesArray;
