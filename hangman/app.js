@@ -1,43 +1,60 @@
 const puzzleEl = document.querySelector('#puzzle');
 const guessesEl = document.querySelector('#guesses');
-const game1 = new Hangman("New York leave", 3);
-
-puzzleEl.textContent = game1.puzzle;
-guessesEl.textContent = game1.status;
-console.log(game1.status);
+const resetBtn = document.querySelector('#reset');
+let game1;
 
 window.addEventListener('keypress', (e) => {
     const guess = String.fromCharCode(e.charCode);
     game1.makeGuess(guess);
-    puzzleEl.textContent = game1.puzzle;
-    guessesEl.textContent = game1.status;
-    console.log(game1.status);
+    render();
 });
 
+const render = () => {
+    puzzleEl.textContent = game1.puzzle;
+    guessesEl.textContent = game1.status;
+};
+
+const startGame = async () => {
+    try{
+        const puzzle = await getPuzzle('2');
+        game1 = new Hangman(puzzle, (puzzle.length / 3).toFixed(0));
+        render();
+        console.log(game1)
+    } catch (err) {
+        console.log('Error:', err);
+    }
+   
+};
+
+startGame();
+
+resetBtn.addEventListener('click', startGame);
+
+
 // ***** Synchronous request Promise **********
-getPuzzle('3')
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+// getPuzzle('3')
+//     .then((data) => console.log(data))
+//     .catch((err) => console.log(err));
 
 // ***** ipo request *********
-getLocation()
-    .then( async (response) => {
-        const country = await getCountry(response.country);
-        console.log(`Country: ${country.name}, City: ${response.city}, Region: ${response.region}`);
-    })
-    .catch((err) => console.log(err));
+// getLocation()
+//     .then( async (response) => {
+//         const country = await getCountry(response.country);
+//         console.log(`Country: ${country.name}, City: ${response.city}, Region: ${response.region}`);
+//     })
+//     .catch((err) => console.log(err));
 
 // *** Country request Promise ***
-getCountry('US')
-.then((country) => console.log(country.name))
-.catch((err) => console.log(err));
+// getCountry('US')
+// .then((country) => console.log(country.name))
+// .catch((err) => console.log(err));
 
 // ***** Get Current Country ***********
-getCurrentCountry()
-    .then((response) => {
-        console.log(response) ;
-    })
-    .catch((err) => console.log(err));
+// getCurrentCountry()
+//     .then((response) => {
+//         console.log(response) ;
+//     })
+//     .catch((err) => console.log(err));
 
 
 // ***** Get puzzle - fetch Promise **********
