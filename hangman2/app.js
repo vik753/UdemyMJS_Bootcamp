@@ -4,7 +4,6 @@ const puzzleEl = document.querySelector('#puzzle');
 const guessesEl = document.querySelector('#guesses');
 let game;
 
-
 // Check numWords
 const checkNumberWords = () => {
   // debugger
@@ -21,46 +20,45 @@ const checkNumberWords = () => {
 };
 
 // render Html
-const renderHtml = () => {
-  if (game._status === 'playing') {
-    puzzleEl.textContent = game.puzzle;
-    guessesEl.textContent = `You have ${game.remainingGuesses} chances`;
-  }
-  if (game._status === 'isWin') {
-    puzzleEl.textContent = `Congretulations! You are winner! You guessed word - "${game.puzzle.toUpperCase()}".`;
-    guessesEl.textContent = `You won by ${(Math.round(game.word.length / 3))} steps`;;
-  }
-  if (game._status === 'isLose') {
-    puzzleEl.textContent = `Good try! Try again. Your guess word is - "${game.word.join('').toUpperCase()}".`;
-    guessesEl.textContent = `You lost all your chances "${game.remainingGuesses}"`;
-  }
-}
+  const renderHtml = () => {
+    if (game._status === 'playing') {
+      puzzleEl.textContent = game.puzzle();
+      guessesEl.textContent = `You have ${game.remainingGuesses} chances`;
+    }
+    if (game._status === 'isWin') {
+      puzzleEl.textContent = `Congretulations! You are winner! You guessed word - "${game.puzzle().toUpperCase()}".`;
+      guessesEl.textContent = `You won by ${(Math.round(game.word.length / 3))} steps`;;
+    }
+    if (game._status === 'isLose') {
+      puzzleEl.textContent = `Good try! Try again. Your guess word is - "${game.word.join('').toUpperCase()}".`;
+      guessesEl.textContent = `You lost all your chances "${game.remainingGuesses}"`;
+    }
+  };
 
 // Start Game
-const startGame = async () => {
-  const numWords = checkNumberWords();
-  await fetchWord(numWords).then((response) => {
-    game = new Puzzle(response);
-  }).catch((err) => console.log(err));
-  renderHtml();
-}
+  const startGame = async () => {
+    const numWords = checkNumberWords();
+    await fetchWord(numWords).then((response) => {
+      game = new Puzzle(response);
+    }).catch((err) => console.log(err));
+    renderHtml();
+  };
 
-startGame();
+  startGame();
 
 // Reset click
-resetEl.addEventListener('click', async () => {
-  await startGame();
-  renderHtml();
-  console.log(game);
-  console.log(game.puzzle);
-});
+  resetEl.addEventListener('click', async () => {
+    await startGame();
+    renderHtml();
+    console.log(game);
+    console.log(game.puzzle());
+  });
 
 // Keypress
-window.addEventListener('keypress', (e) => {
-  const guess = String.fromCharCode(e.charCode).toLowerCase();
-  game.makeGuess(guess);
+  window.addEventListener('keypress', (e) => {
+    const guess = String.fromCharCode(e.charCode).toLowerCase();
+    game.makeGuess(guess);
 
-  renderHtml();
-  console.log(game);
-
-});
+    renderHtml();
+    console.log(game);
+  });

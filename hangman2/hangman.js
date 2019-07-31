@@ -6,7 +6,8 @@ class Puzzle {
     this._status = 'playing';
   }
 
-  get puzzle() {
+
+  puzzle() {
     let puzzle = '';
     this.word.forEach((letter) => {
       if (this.guessedLetters.includes(letter) || letter === ' ') {
@@ -38,7 +39,7 @@ class Puzzle {
 
   // Calculate status
   calculateStatus() {
-    const isWin = this.word.join('') === this.puzzle;
+    const isWin = this.word.join('') === this.puzzle();
     const isLose = !isWin && this.remainingGuesses === 0;
     console.log(`isWin: ${isWin}. isLose: ${isLose}`);
 
@@ -51,7 +52,6 @@ class Puzzle {
       }
     }
   }
-
 }
 
 
