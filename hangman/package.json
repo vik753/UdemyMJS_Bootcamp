@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "Hangman",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hangman game",
   "main": "input.js",
   "scripts": {
     "dev-server": "webpack-dev-server --mode development",
